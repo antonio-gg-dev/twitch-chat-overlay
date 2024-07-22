@@ -1,9 +1,13 @@
 <template>
-  <main>
+  <main
+    :style="{
+      '--bg-rotate': bgRotate + 'deg'
+    }"
+  >
     <MessageBox
         v-for="message in messages"
-        :user="message.userName"
-        :color="message.userColor"
+        :user="message.user"
+        :color="message.color"
         :message="message.message"
     />
   </main>
@@ -15,8 +19,8 @@ import {ChatClient, ChatMessage} from "@twurple/chat";
 import MessageBox from "@/components/MessageBox/MessageBox.vue";
 
 interface Message {
-  userName: string
-  userColor: string
+  user: string
+  color: string | null
   message: string
 }
 
@@ -25,7 +29,9 @@ export default defineComponent({
   data() {
     return {
       chat: null as null | ChatClient,
-      messages: [] as Message[]
+      messages: [] as Message[],
+      bgRotate: 0 as number,
+      rotationIntervalId: null as null | ReturnType<typeof setInterval>
     }
   },
 
@@ -34,16 +40,30 @@ export default defineComponent({
     this.chat.connect()
 
     this.chat.onMessage(async (channel: string, user: string, text: string, msg: ChatMessage) => {
+      let color = null
+
+      if(msg.userInfo.color) {
+        color = msg.userInfo.color
+      }
+
       this.messages.push({
-        userName: user,
-        userColor: msg.userInfo.color ?? '#000000',
+        user: user,
+        color: color,
         message: text,
       })
     })
+
+    this.rotationIntervalId = setInterval(() => {
+      this.bgRotate += 6
+    }, 1000)
   },
 
   unmounted() {
     this.chat?.quit()
+
+    if(this.rotationIntervalId) {
+      clearInterval(this.rotationIntervalId)
+    }
   }
 })
 </script>
