@@ -14,7 +14,7 @@
     "format": "prettier --write src/",
     "stories": "storybook dev -p 6006",
     "stories:build": "storybook build",
-    "stories:publish": "npx chromatic --project-token=chpt_94523d9fbf8f322 -b stories:build"
+    "stories:publish": "npx chromatic -b stories:build --no-interactive"
   },
   "dependencies": {
     "@twurple/auth": "^7.1.0",

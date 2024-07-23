@@ -1,37 +1,27 @@
 <template>
-  <main
-    :style="{
-      '--bg-rotate': bgRotate + 'deg'
-    }"
-  >
-    <MessageBox
-        v-for="message in messages"
-        :user="message.user"
-        :color="message.color"
-        :message="message.message"
-    />
-  </main>
+  <MessagesList
+      :messages="messages"
+  />
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 import {ChatClient, ChatMessage} from "@twurple/chat";
-import MessageBox from "@/components/MessageBox/MessageBox.vue";
+import MessagesList from "@/components/MessagesList/MessagesList.vue";
 
-interface Message {
+export interface Message {
   user: string
   color: string | null
-  message: string
+  message: string,
+  timestamp: null,
 }
 
 export default defineComponent({
-  components: {MessageBox},
+  components: {MessagesList},
   data() {
     return {
       chat: null as null | ChatClient,
       messages: [] as Message[],
-      bgRotate: 0 as number,
-      rotationIntervalId: null as null | ReturnType<typeof setInterval>
     }
   },
 
@@ -46,24 +36,19 @@ export default defineComponent({
         color = msg.userInfo.color
       }
 
+      msg.date
+
       this.messages.push({
         user: user,
         color: color,
         message: text,
+        timestamp: null,
       })
     })
-
-    this.rotationIntervalId = setInterval(() => {
-      this.bgRotate = (this.bgRotate += 1) % 360
-    }, 6_000/360)
   },
 
   unmounted() {
     this.chat?.quit()
-
-    if(this.rotationIntervalId) {
-      clearInterval(this.rotationIntervalId)
-    }
   }
 })
 </script>
