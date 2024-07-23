@@ -54,8 +54,8 @@ export default defineComponent({
     })
 
     this.rotationIntervalId = setInterval(() => {
-      this.bgRotate += 6
-    }, 1000)
+      this.bgRotate = (this.bgRotate += 1) % 360
+    }, 6_000/360)
   },
 
   unmounted() {

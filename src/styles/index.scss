@@ -1,5 +1,9 @@
 @tailwind base;
 
+body {
+  @apply bg-transparent;
+}
+
 @tailwind components;
 
 @tailwind utilities;

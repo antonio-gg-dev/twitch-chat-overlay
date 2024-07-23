@@ -3,7 +3,9 @@ import type {Meta, StoryObj} from "@storybook/vue3";
 
 export default {
   component: MessageBox,
-  argTypes: {}
+  argTypes: {
+    color: { control: 'color' }
+  }
 } satisfies Meta<typeof MessageBox>
 
 export const Default: StoryObj<typeof MessageBox> = {
