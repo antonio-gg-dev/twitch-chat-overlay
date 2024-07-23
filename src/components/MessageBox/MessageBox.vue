@@ -112,10 +112,10 @@ export default defineComponent({
   }
 
   &__user {
-    @apply inline-block px-2 py-0.5 overflow-hidden absolute inset-y-0 left-0 whitespace-nowrap max-w-full;
+    @apply inline-block px-2 py-0.5 overflow-hidden absolute top-0 bottom-2 left-0 whitespace-nowrap max-w-full;
 
     &:before {
-      @apply absolute origin-center bottom-1/2 right-1/2 h-[100vmax] w-[100vmax] blur-xl z-[-1];
+      @apply absolute origin-center bottom-1/2 right-1/2 h-[200vmax] w-[200vmax] blur-xl z-[-1];
       transform: translate(50%, 50%) rotate(var(--bg-rotate, 0deg));
       background-image: conic-gradient(
               var(--color-primary),

@@ -36,7 +36,7 @@ export const LongUserName: StoryObj<typeof MessageBox> = {
   args: {
     user: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum luctus mauris, at venenatis eros aliquam ac. Nam pellentesque luctus erat vel ultrices.',
     color: '#17e5aa',
-    message: 'Hola Mundo',
+    message: 'Hola mundo',
   }
 }
 
