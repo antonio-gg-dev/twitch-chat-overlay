@@ -8,12 +8,14 @@
 import {defineComponent} from "vue";
 import {ChatClient, ChatMessage} from "@twurple/chat";
 import MessagesList from "@/components/MessagesList/MessagesList.vue";
+import md5 from "md5";
 
 export interface Message {
+  id: string
   user: string
   color: string | null
-  message: string,
-  timestamp: null,
+  message: string
+  timestamp: Date
 }
 
 export default defineComponent({
@@ -36,14 +38,15 @@ export default defineComponent({
         color = msg.userInfo.color
       }
 
-      msg.date
-
       this.messages.push({
+        id: md5(msg.date.toISOString() + user),
         user: user,
         color: color,
         message: text,
-        timestamp: null,
+        timestamp: msg.date,
       })
+
+      this.messages = this.messages.slice(-20)
     })
   },
 

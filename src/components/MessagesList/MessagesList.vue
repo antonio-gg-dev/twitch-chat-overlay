@@ -1,16 +1,25 @@
 <template>
-  <main
+  <TransitionGroup
+    tag="main"
+    name="list"
+    class="messages-list__container"
     :style="{
       '--bg-rotate': bgRotate + 'deg'
     }"
   >
+    <div
+      class="messages-list__space"
+    >
+    </div>
+
     <MessageBox
         v-for="message in messages"
+        :key="message.id"
         :user="message.user"
         :color="message.color"
         :message="message.message"
     />
-  </main>
+  </TransitionGroup>
 </template>
 
 <script lang="ts">
@@ -52,5 +61,22 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.messages-list {
+  &__container {
+    @apply flex flex-col min-h-screen w-screen bottom-0 left-0 right-0 fixed;
+  }
 
+  &__space {
+    @apply h-screen;
+  }
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active {
+  @apply ease-in-out transition-all duration-300;
+}
+
+.list-enter-from {
+  @apply opacity-0 translate-y-4;
+}
 </style>
