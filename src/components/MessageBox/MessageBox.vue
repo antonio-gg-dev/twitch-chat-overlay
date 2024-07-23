@@ -108,7 +108,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .message-box {
   &__container {
-    @apply mb-4 relative pt-7;
+    @apply mb-4 relative pt-7 w-full h-auto;
   }
 
   &__user {

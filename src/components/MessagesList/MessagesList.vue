@@ -9,6 +9,7 @@
   >
     <div
       class="messages-list__space"
+      key="separator"
     >
     </div>
 
@@ -63,7 +64,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .messages-list {
   &__container {
-    @apply flex flex-col min-h-screen w-screen bottom-0 left-0 right-0 fixed;
+    @apply min-h-screen w-screen bottom-0 left-0 right-0 fixed;
   }
 
   &__space {
@@ -71,12 +72,18 @@ export default defineComponent({
   }
 }
 
-.list-move, /* apply transition to moving elements */
-.list-enter-active {
+.list-move,
+.list-enter-active,
+.list-leave-active {
   @apply ease-in-out transition-all duration-300;
 }
 
-.list-enter-from {
+.list-enter-from,
+.list-leave-to {
   @apply opacity-0 translate-y-4;
+}
+
+.list-leave-active {
+  @apply absolute;
 }
 </style>

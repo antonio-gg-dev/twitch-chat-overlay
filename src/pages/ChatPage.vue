@@ -9,13 +9,14 @@ import {defineComponent} from "vue";
 import {ChatClient, ChatMessage} from "@twurple/chat";
 import MessagesList from "@/components/MessagesList/MessagesList.vue";
 import md5 from "md5";
+import type { isNewExpression } from "typescript";
 
 export interface Message {
   id: string
   user: string
   color: string | null
   message: string
-  timestamp: Date
+  date: Date
 }
 
 export default defineComponent({
@@ -24,6 +25,7 @@ export default defineComponent({
     return {
       chat: null as null | ChatClient,
       messages: [] as Message[],
+      cleanupIntervalId: null as null | ReturnType<typeof setInterval>
     }
   },
 
@@ -43,15 +45,31 @@ export default defineComponent({
         user: user,
         color: color,
         message: text,
-        timestamp: msg.date,
+        date: msg.date,
       })
 
       this.messages = this.messages.slice(-20)
     })
+
+    this.cleanupIntervalId = setInterval(() => {
+      const newestMessage = this.messages.slice(-1).at(0)
+
+      if (newestMessage === undefined) {
+        return
+      }
+
+      if (newestMessage.date < new Date(new Date().getTime() - 300_000)) {
+        this.messages = []
+      }
+    }, 10_000)
   },
 
   unmounted() {
     this.chat?.quit()
+
+    if(this.cleanupIntervalId) {
+      clearInterval(this.cleanupIntervalId)
+    }
   }
 })
 </script>
