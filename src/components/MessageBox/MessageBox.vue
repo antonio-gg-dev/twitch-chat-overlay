@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { type CSSProperties, defineComponent, type PropType } from 'vue'
-import md5 from 'md5'
 import { ColorVariants, type ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
 import { UserColor, UserColorService } from '@/Services/Color/UserColorService'
 
