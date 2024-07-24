@@ -1,14 +1,13 @@
-import MessagesList from '@/components/MessagesList/MessagesList.vue';
-import type {Meta, StoryObj} from "@storybook/vue3";
+import MessagesList from '@/components/MessagesList/MessagesList.vue'
+import type { Meta, StoryObj } from '@storybook/vue3'
 
 export default {
   component: MessagesList,
-  argTypes: {
-  }
+  argTypes: {}
 } satisfies Meta<typeof MessagesList>
 
 export const Default: StoryObj<typeof MessagesList> = {
   args: {
-    messages: [],
+    messages: []
   }
 }

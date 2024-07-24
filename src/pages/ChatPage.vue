@@ -1,15 +1,12 @@
 <template>
-  <MessagesList
-      :messages="messages"
-  />
+  <MessagesList :messages="messages" />
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {ChatClient, ChatMessage} from "@twurple/chat";
-import MessagesList from "@/components/MessagesList/MessagesList.vue";
-import md5 from "md5";
-import type { isNewExpression } from "typescript";
+import { defineComponent } from 'vue'
+import { ChatClient, ChatMessage } from '@twurple/chat'
+import MessagesList from '@/components/MessagesList/MessagesList.vue'
+import md5 from 'md5'
 
 export interface Message {
   id: string
@@ -20,7 +17,7 @@ export interface Message {
 }
 
 export default defineComponent({
-  components: {MessagesList},
+  components: { MessagesList },
   data() {
     return {
       chat: null as null | ChatClient,
@@ -36,7 +33,7 @@ export default defineComponent({
     this.chat.onMessage(async (channel: string, user: string, text: string, msg: ChatMessage) => {
       let color = null
 
-      if(msg.userInfo.color) {
+      if (msg.userInfo.color) {
         color = msg.userInfo.color
       }
 
@@ -45,7 +42,7 @@ export default defineComponent({
         user: user,
         color: color,
         message: text,
-        date: msg.date,
+        date: msg.date
       })
 
       this.messages = this.messages.slice(-20)
@@ -67,7 +64,7 @@ export default defineComponent({
   unmounted() {
     this.chat?.quit()
 
-    if(this.cleanupIntervalId) {
+    if (this.cleanupIntervalId) {
       clearInterval(this.cleanupIntervalId)
     }
   }

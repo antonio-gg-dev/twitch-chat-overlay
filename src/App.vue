@@ -3,13 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import ChatPage from "@/pages/ChatPage.vue";
+import { defineComponent } from 'vue'
+import ChatPage from '@/pages/ChatPage.vue'
 
 export default defineComponent({
-  components: { ChatPage },
+  components: { ChatPage }
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

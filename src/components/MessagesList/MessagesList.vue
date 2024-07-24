@@ -7,37 +7,30 @@
       '--bg-rotate': bgRotate + 'deg'
     }"
   >
-    <div
-      class="messages-list__space"
-      key="separator"
-    >
-    </div>
+    <div key="separator" class="messages-list__space"></div>
 
     <MessageBox
-        v-for="message in messages"
-        :key="message.id"
-        :user="message.user"
-        :color="message.color"
-        :message="message.message"
+      v-for="message in messages"
+      :key="message.id"
+      :user="message.user"
+      :color="message.color"
+      :message="message.message"
     />
   </TransitionGroup>
 </template>
 
 <script lang="ts">
-import {defineComponent, type PropType} from 'vue'
-import md5 from 'md5'
-import Color from "colorjs.io";
-import type {Message} from "@/pages/ChatPage.vue";
-import MessageBox from "@/components/MessageBox/MessageBox.vue";
-import {ChatClient, ChatMessage} from "@twurple/chat";
+import { defineComponent, type PropType } from 'vue'
+import type { Message } from '@/pages/ChatPage.vue'
+import MessageBox from '@/components/MessageBox/MessageBox.vue'
 
 export default defineComponent({
-  components: {MessageBox},
+  components: { MessageBox },
   props: {
     messages: {
       required: true,
-      type: Array as PropType<Message[]>,
-    },
+      type: Array as PropType<Message[]>
+    }
   },
 
   data() {
@@ -50,11 +43,11 @@ export default defineComponent({
   mounted() {
     this.rotationIntervalId = setInterval(() => {
       this.bgRotate = (this.bgRotate += 1) % 360
-    }, 60_000/360)
+    }, 60_000 / 360)
   },
 
   unmounted() {
-    if(this.rotationIntervalId) {
+    if (this.rotationIntervalId) {
       clearInterval(this.rotationIntervalId)
     }
   }

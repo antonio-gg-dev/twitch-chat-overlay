@@ -1,11 +1,9 @@
-import { type Config } from 'tailwindcss';
+import { type Config } from 'tailwindcss'
 
 export default {
-  content: [
-    './src/**/*.vue'
-  ],
+  content: ['./src/**/*.vue'],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 } satisfies Config
