@@ -1,1 +1,3 @@
-export interface HashInterface {}
+export interface HashInterface {
+  hash(string: string): string
+}
