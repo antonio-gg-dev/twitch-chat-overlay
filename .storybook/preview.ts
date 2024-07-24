@@ -1,5 +1,6 @@
-import type { Preview } from '@storybook/vue3'
+import { type Preview, setup } from '@storybook/vue3'
 import '@/styles/index.scss'
+import { provide } from '../src/Bindings'
 
 const preview: Preview = {
   parameters: {
@@ -11,5 +12,9 @@ const preview: Preview = {
     }
   }
 }
+
+setup((app) => {
+  provide(app)
+})
 
 export default preview

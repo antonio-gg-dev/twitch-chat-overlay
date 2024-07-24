@@ -1,7 +1,7 @@
 import type { ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
 import Color from 'colorjs.io'
 
-export class ColorVariantsJsIoColor implements ColorVariantsInterface {
+export class ColorJsIoColorVariants implements ColorVariantsInterface {
   colorPrimary(color: string): string {
     const colorObj = new Color(color)
 

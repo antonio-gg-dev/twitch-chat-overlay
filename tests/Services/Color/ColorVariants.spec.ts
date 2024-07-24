@@ -1,11 +1,11 @@
 import { it, expect, beforeEach } from 'vitest'
 import { ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
-import { ColorVariantsJsIoColor } from '@/Services/Color/ColorVariantsJsIoColor'
+import { ColorJsIoColorVariants } from '../../../src/Services/Color/ColorJsIoColorVariants'
 
 let colorVariants: ColorVariantsInterface
 
 beforeEach(() => {
-  colorVariants = new ColorVariantsJsIoColor()
+  colorVariants = new ColorJsIoColorVariants()
 })
 
 it.each([
