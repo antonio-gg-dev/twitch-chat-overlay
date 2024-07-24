@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="message-box__container"
-    :style="{
-      '--color-primary': colorPrimary,
-      '--color-secondary': colorSecondary,
-      '--color-tertiary': colorTertiary,
-      '--color-primary-light': colorPrimaryLight,
-      '--color-secondary-light': colorSecondaryLight,
-      '--color-tertiary-light': colorTertiaryLight
-    }"
-  >
+  <div class="message-box__container" :style="styles">
     <strong class="message-box__user">
       {{ user }}
     </strong>
@@ -23,11 +13,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from 'vue'
+import { type CSSProperties, defineComponent, type PropType } from 'vue'
 import md5 from 'md5'
-import Color from 'colorjs.io'
+import { ColorVariants, type ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
 
 export default defineComponent({
+  inject: {
+    colorVariants: { from: ColorVariants }
+  },
+
   props: {
     user: {
       required: true,
@@ -43,6 +37,7 @@ export default defineComponent({
       type: String as PropType<string>
     }
   },
+
   computed: {
     userColor(): string {
       if (this.color !== null) {
@@ -52,54 +47,17 @@ export default defineComponent({
       return '#' + md5(this.user).substring(0, 6)
     },
 
-    colorPrimary(): string {
-      let color = new Color(this.userColor)
+    styles(): CSSProperties {
+      const colorVariants = this.colorVariants as ColorVariantsInterface | undefined
 
-      color.hsl.h += 0
-      color.hsl.l = 50
-      color.hsl.s = 70
-
-      return color.toString({ format: 'hex' })
-    },
-    colorSecondary(): string {
-      let color = new Color(this.userColor)
-
-      color.hsl.h += 20
-      color.hsl.l = 50
-      color.hsl.s = 70
-
-      return color.toString({ format: 'hex' })
-    },
-    colorTertiary(): string {
-      let color = new Color(this.userColor)
-
-      color.hsl.h -= 20
-      color.hsl.l = 50
-      color.hsl.s = 70
-
-      return color.toString({ format: 'hex' })
-    },
-
-    colorPrimaryLight(): string {
-      let color = new Color(this.colorPrimary)
-
-      color.hsl.l = 80
-
-      return color.toString({ format: 'hex' })
-    },
-    colorSecondaryLight(): string {
-      let color = new Color(this.colorSecondary)
-
-      color.hsl.l = 80
-
-      return color.toString({ format: 'hex' })
-    },
-    colorTertiaryLight(): string {
-      let color = new Color(this.colorTertiary)
-
-      color.hsl.l = 80
-
-      return color.toString({ format: 'hex' })
+      return {
+        '--color-primary': colorVariants?.colorPrimary(this.userColor),
+        '--color-secondary': colorVariants?.colorSecondary(this.userColor),
+        '--color-tertiary': colorVariants?.colorTertiary(this.userColor),
+        '--color-primary-light': colorVariants?.colorPrimaryLight(this.userColor),
+        '--color-secondary-light': colorVariants?.colorSecondaryLight(this.userColor),
+        '--color-tertiary-light': colorVariants?.colorTertiaryLight(this.userColor)
+      }
     }
   }
 })
