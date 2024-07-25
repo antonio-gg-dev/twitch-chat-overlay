@@ -101,6 +101,7 @@ jobs:
       - static-analysis
       - lint
       - format
+      - tests
       - stories
     runs-on: ubuntu-latest
     permissions:
