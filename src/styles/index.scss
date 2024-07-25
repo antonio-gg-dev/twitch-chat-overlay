@@ -4,6 +4,14 @@ body {
   @apply bg-transparent;
 }
 
+* {
+  @apply select-none;
+
+  &:focus {
+    @apply outline-none;
+  }
+}
+
 @tailwind components;
 
 @tailwind utilities;

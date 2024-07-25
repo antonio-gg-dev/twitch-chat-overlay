@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import MessagesList from '@/components/MessagesList/MessagesList.vue'
 import type { Message } from '@/modules/Chat/Message'
 import { Chat, type ChatInterface } from '@/modules/Chat/ChatInterface'
@@ -13,6 +13,13 @@ export default defineComponent({
 
   inject: {
     chat: { from: Chat }
+  },
+
+  props: {
+    channel: {
+      required: true,
+      type: String as PropType<string>
+    }
   },
 
   data() {
@@ -26,7 +33,7 @@ export default defineComponent({
     const chat = this.chat as ChatInterface | undefined
 
     if (chat) {
-      chat.connect('antonio_gg_dev')
+      chat.connect(this.channel)
 
       chat.onMessage((message) => {
         this.messages.push(message)

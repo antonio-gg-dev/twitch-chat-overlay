@@ -9,8 +9,6 @@ export class TwurpleChat implements ChatInterface {
   constructor(private hash: HashInterface) {}
 
   connect(channel: string): void {
-    console.log({ channel })
-
     this.client = new ChatClient({ channels: [channel] })
 
     this.client.connect()
