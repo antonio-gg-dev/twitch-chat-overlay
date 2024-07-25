@@ -1,4 +1,4 @@
-import type { HashInterface } from '@/Services/Hash/HashInterface'
+import type { HashInterface } from '@/modules/Hash/HashInterface'
 
 export class UserColorService {
   constructor(private hash: HashInterface) {}

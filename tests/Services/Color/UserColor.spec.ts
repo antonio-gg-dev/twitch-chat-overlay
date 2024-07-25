@@ -1,6 +1,6 @@
 import { it, expect, beforeEach } from 'vitest'
-import { UserColorService } from '@/Services/Color/UserColorService'
-import { Md5Hash } from '@/Services/Hash/Md5Hash'
+import { UserColorService } from '../../../src/modules/Color/UserColorService'
+import { Md5Hash } from '../../../src/modules/Hash/Md5Hash'
 
 let userColor: UserColorService
 

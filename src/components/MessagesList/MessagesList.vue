@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import type { Message } from '@/pages/ChatPage.vue'
 import MessageBox from '@/components/MessageBox/MessageBox.vue'
+import type { Message } from '@/modules/Chat/Message'
 
 export default defineComponent({
   components: { MessageBox },
@@ -41,14 +41,24 @@ export default defineComponent({
   },
 
   mounted() {
-    this.rotationIntervalId = setInterval(() => {
-      this.bgRotate = (this.bgRotate += 1) % 360
-    }, 60_000 / 360)
+    this.startRotationAnimation()
   },
 
   unmounted() {
-    if (this.rotationIntervalId) {
-      clearInterval(this.rotationIntervalId)
+    this.stopRotationAnimation()
+  },
+
+  methods: {
+    startRotationAnimation() {
+      this.rotationIntervalId = setInterval(() => {
+        this.bgRotate = (this.bgRotate += 1) % 360
+      }, 60_000 / 360)
+    },
+
+    stopRotationAnimation() {
+      if (this.rotationIntervalId) {
+        clearInterval(this.rotationIntervalId)
+      }
     }
   }
 })

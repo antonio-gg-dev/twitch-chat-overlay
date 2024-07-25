@@ -14,8 +14,8 @@
 
 <script lang="ts">
 import { type CSSProperties, defineComponent, type PropType } from 'vue'
-import { ColorVariants, type ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
-import { UserColor, UserColorService } from '@/Services/Color/UserColorService'
+import { ColorVariants, type ColorVariantsInterface } from '@/modules/Color/ColorVariantsInterface'
+import { UserColor, UserColorService } from '@/modules/Color/UserColorService'
 
 export default defineComponent({
   inject: {
@@ -48,15 +48,15 @@ export default defineComponent({
         return {}
       }
 
-      const color = userColor?.userColor(this.user, this.color)
+      const color = userColor.userColor(this.user, this.color)
 
       return {
-        '--color-primary': colorVariants?.colorPrimary(color),
-        '--color-secondary': colorVariants?.colorSecondary(color),
-        '--color-tertiary': colorVariants?.colorTertiary(color),
-        '--color-primary-light': colorVariants?.colorPrimaryLight(color),
-        '--color-secondary-light': colorVariants?.colorSecondaryLight(color),
-        '--color-tertiary-light': colorVariants?.colorTertiaryLight(color)
+        '--color-primary': colorVariants.colorPrimary(color),
+        '--color-secondary': colorVariants.colorSecondary(color),
+        '--color-tertiary': colorVariants.colorTertiary(color),
+        '--color-primary-light': colorVariants.colorPrimaryLight(color),
+        '--color-secondary-light': colorVariants.colorSecondaryLight(color),
+        '--color-tertiary-light': colorVariants.colorTertiaryLight(color)
       }
     }
   }

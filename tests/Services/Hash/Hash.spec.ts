@@ -1,6 +1,6 @@
 import { it, expect, beforeEach } from 'vitest'
-import { HashInterface } from '@/Services/Hash/HashInterface'
-import { Md5Hash } from '@/Services/Hash/Md5Hash'
+import { HashInterface } from '../../../src/modules/Hash/HashInterface'
+import { Md5Hash } from '../../../src/modules/Hash/Md5Hash'
 
 let hash: HashInterface
 

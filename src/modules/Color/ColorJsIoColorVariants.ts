@@ -1,4 +1,4 @@
-import type { ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
+import type { ColorVariantsInterface } from '@/modules/Color/ColorVariantsInterface'
 import Color from 'colorjs.io'
 
 export class ColorJsIoColorVariants implements ColorVariantsInterface {

@@ -1,6 +1,6 @@
 import { it, expect, beforeEach } from 'vitest'
-import { ColorVariantsInterface } from '@/Services/Color/ColorVariantsInterface'
-import { ColorJsIoColorVariants } from '../../../src/Services/Color/ColorJsIoColorVariants'
+import { ColorVariantsInterface } from '../../../src/modules/Color/ColorVariantsInterface'
+import { ColorJsIoColorVariants } from '../../../src/modules/Color/ColorJsIoColorVariants'
 
 let colorVariants: ColorVariantsInterface
 
