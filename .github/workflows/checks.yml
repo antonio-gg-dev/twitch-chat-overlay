@@ -4,10 +4,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-concurrency:
-  group: deploy
-  cancel-in-progress: false
-
 jobs:
   static-analysis:
     runs-on: ubuntu-latest
