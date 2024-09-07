@@ -46,7 +46,11 @@ export default defineComponent({
       })
 
       chat.onBan((user) => {
-        this.messages = this.messages.filter((message) => message.user !== user)
+        this.removeMessagesFrom(user)
+      })
+
+      chat.onTimeout((user) => {
+        this.removeMessagesFrom(user)
       })
     }
 
@@ -82,6 +86,10 @@ export default defineComponent({
       if (this.cleanupIntervalId) {
         clearInterval(this.cleanupIntervalId)
       }
+    },
+
+    removeMessagesFrom(user: string) {
+      this.messages = this.messages.filter((message) => message.user !== user)
     }
   }
 })

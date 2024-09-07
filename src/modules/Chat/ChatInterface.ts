@@ -5,6 +5,7 @@ export interface ChatInterface {
   onMessage(callback: (message: Message) => void): void
   onRemoveMessage(callback: (messageId: string) => void): void
   onBan(callback: (user: string) => void): void
+  onTimeout(callback: (user: string) => void): void
   disconnect(): void
 }
 

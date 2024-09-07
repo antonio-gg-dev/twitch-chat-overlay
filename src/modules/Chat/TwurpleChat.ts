@@ -56,6 +56,16 @@ export class TwurpleChat implements ChatInterface {
     })
   }
 
+  onTimeout(callback: (user: string) => void) {
+    if (this.client === null) {
+      return
+    }
+
+    this.client.onTimeout((_: string, user: string) => {
+      callback(user)
+    })
+  }
+
   disconnect(): void {
     if (this.client === null) {
       return
