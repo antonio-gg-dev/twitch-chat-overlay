@@ -44,6 +44,10 @@ export default defineComponent({
       chat.onRemoveMessage((messageId) => {
         this.messages = this.messages.filter((message) => message.id !== messageId)
       })
+
+      chat.onBan((user) => {
+        this.messages = this.messages.filter((message) => message.user !== user)
+      })
     }
 
     this.startCleaningOldMessages()

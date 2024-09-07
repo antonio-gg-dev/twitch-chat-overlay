@@ -36,10 +36,6 @@ export class TwurpleChat implements ChatInterface {
     })
   }
 
-  private createMessageId(twurpleMessageId: string, user: string) {
-    return this.hash.hash(twurpleMessageId + user)
-  }
-
   onRemoveMessage(callback: (messageId: string) => void): void {
     if (this.client === null) {
       return
@@ -50,11 +46,25 @@ export class TwurpleChat implements ChatInterface {
     })
   }
 
+  onBan(callback: (user: string) => void): void {
+    if (this.client === null) {
+      return
+    }
+
+    this.client.onBan((_: string, user: string) => {
+      callback(user)
+    })
+  }
+
   disconnect(): void {
     if (this.client === null) {
       return
     }
 
     this.client.quit()
+  }
+
+  private createMessageId(twurpleMessageId: string, user: string) {
+    return this.hash.hash(twurpleMessageId + user)
   }
 }
