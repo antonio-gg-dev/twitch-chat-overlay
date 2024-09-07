@@ -40,6 +40,10 @@ export default defineComponent({
 
         this.messages = this.messages.slice(-20)
       })
+
+      chat.onRemoveMessage((messageId) => {
+        this.messages = this.messages.filter((message) => message.id !== messageId)
+      })
     }
 
     this.startCleaningOldMessages()
