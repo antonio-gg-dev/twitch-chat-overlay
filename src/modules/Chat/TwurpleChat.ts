@@ -1,6 +1,6 @@
 import type { ChatInterface } from '@/modules/Chat/ChatInterface'
 import type { Message } from '@/modules/Chat/Message'
-import { ChatClient, ChatMessage } from '@twurple/chat'
+import { ChatClient, ChatMessage, type ClearMsg } from '@twurple/chat'
 import type { HashInterface } from '@/modules/Hash/HashInterface'
 
 export class TwurpleChat implements ChatInterface {
@@ -27,12 +27,42 @@ export class TwurpleChat implements ChatInterface {
       }
 
       callback({
-        id: this.hash.hash(data.date.toISOString() + user),
+        id: this.createMessageId(data.id, user),
         user: user,
         color: color,
         message: message,
         date: data.date
       })
+    })
+  }
+
+  onRemoveMessage(callback: (messageId: string) => void): void {
+    if (this.client === null) {
+      return
+    }
+
+    this.client.onMessageRemove((_: string, id: string, data: ClearMsg) => {
+      callback(this.createMessageId(data.targetMessageId, data.userName))
+    })
+  }
+
+  onBan(callback: (user: string) => void): void {
+    if (this.client === null) {
+      return
+    }
+
+    this.client.onBan((_: string, user: string) => {
+      callback(user)
+    })
+  }
+
+  onTimeout(callback: (user: string) => void) {
+    if (this.client === null) {
+      return
+    }
+
+    this.client.onTimeout((_: string, user: string) => {
+      callback(user)
     })
   }
 
@@ -42,5 +72,9 @@ export class TwurpleChat implements ChatInterface {
     }
 
     this.client.quit()
+  }
+
+  private createMessageId(twurpleMessageId: string, user: string) {
+    return this.hash.hash(twurpleMessageId + user)
   }
 }

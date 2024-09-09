@@ -40,6 +40,18 @@ export default defineComponent({
 
         this.messages = this.messages.slice(-20)
       })
+
+      chat.onRemoveMessage((messageId) => {
+        this.messages = this.messages.filter((message) => message.id !== messageId)
+      })
+
+      chat.onBan((user) => {
+        this.removeMessagesFrom(user)
+      })
+
+      chat.onTimeout((user) => {
+        this.removeMessagesFrom(user)
+      })
     }
 
     this.startCleaningOldMessages()
@@ -74,6 +86,10 @@ export default defineComponent({
       if (this.cleanupIntervalId) {
         clearInterval(this.cleanupIntervalId)
       }
+    },
+
+    removeMessagesFrom(user: string) {
+      this.messages = this.messages.filter((message) => message.user !== user)
     }
   }
 })
