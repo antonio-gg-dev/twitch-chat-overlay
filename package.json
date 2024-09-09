@@ -14,6 +14,7 @@
     "lint:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore .",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
+    "all:fix": "npm run lint:fix && npm run format:fix",
     "sa": "tsc",
     "stories": "storybook dev -p 6006",
     "stories:build": "storybook build",
@@ -29,6 +30,7 @@
     "@twurple/chat": "^7.1.0",
     "colorjs.io": "^0.5.2",
     "md5": "^2.3.0",
+    "notyf": "^3.10.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

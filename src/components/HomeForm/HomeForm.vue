@@ -38,9 +38,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
+import { Toast, type ToastInterface } from '@/modules/Toast/ToastInterface'
 
 export default defineComponent({
+  setup() {
+    return {
+      toast: inject<ToastInterface>(Toast)
+    }
+  },
   data() {
     return {
       channel: '' as string
@@ -64,6 +70,8 @@ export default defineComponent({
       }
 
       navigator.clipboard.writeText(this.chatUrl)
+
+      this.toast?.info('URL copied to clipboard')
     }
   }
 })

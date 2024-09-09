@@ -1,16 +1,8 @@
 @tailwind base;
 
-body {
-  @apply bg-transparent;
-}
+@import 'base/commons';
 
-* {
-  @apply select-none;
-
-  &:focus {
-    @apply outline-none;
-  }
-}
+@import 'libs/notyf';
 
 @tailwind components;
 

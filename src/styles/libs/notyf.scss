@@ -1,0 +1,17 @@
+@import 'notyf/notyf.min.css';
+
+.notyf {
+  &__toast {
+    @apply bg-neutral-300 px-4 py-2 mt-2 w-full transition-colors text-black;
+    box-shadow: theme('spacing.2') theme('spacing.2') theme('colors.neutral.400');
+
+    &:hover,
+    &:focus {
+      @apply bg-neutral-200;
+    }
+  }
+
+  &__wrapper {
+    @apply p-0;
+  }
+}
