@@ -18,6 +18,7 @@
         ref="chatUrl"
         readonly
         class="home-form__input"
+        data-chromatic="ignore"
         :value="chatUrl"
         @click="copyToClipboard"
       />
