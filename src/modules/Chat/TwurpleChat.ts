@@ -1,20 +1,17 @@
 import type { ChatInterface } from '@/modules/Chat/ChatInterface'
 import type { Message } from '@/modules/Chat/Message'
-import { ChatClient, ChatMessage, type ClearMsg } from '@twurple/chat'
-import type { HashInterface } from '@/modules/Hash/HashInterface'
+import { ChatClient, ChatMessage } from '@twurple/chat'
 
 export class TwurpleChat implements ChatInterface {
-  private client: ChatClient | null = null
-
-  constructor(private hash: HashInterface) {}
+  constructor(private client: ChatClient) {}
 
   connect(channel: string): void {
-    this.client = new ChatClient({ channels: [channel] })
-
     this.client.connect()
+
+    this.client.join(channel)
   }
 
-  onMessage(callback: (message: Message) => void): void {
+  addMessage(callback: (message: Message) => void): void {
     if (this.client === null) {
       return
     }
@@ -27,7 +24,7 @@ export class TwurpleChat implements ChatInterface {
       }
 
       callback({
-        id: this.createMessageId(data.id, user),
+        id: data.id,
         user: user,
         color: color,
         message: message,
@@ -36,45 +33,23 @@ export class TwurpleChat implements ChatInterface {
     })
   }
 
-  onRemoveMessage(callback: (messageId: string) => void): void {
-    if (this.client === null) {
-      return
-    }
-
-    this.client.onMessageRemove((_: string, id: string, data: ClearMsg) => {
-      callback(this.createMessageId(data.targetMessageId, data.userName))
+  removeMessageById(callback: (id: string) => void): void {
+    this.client?.onMessageRemove((_: string, id: string) => {
+      callback(id)
     })
   }
 
-  onBan(callback: (user: string) => void): void {
-    if (this.client === null) {
-      return
-    }
-
-    this.client.onBan((_: string, user: string) => {
+  removeMessageByUser(callback: (user: string) => void): void {
+    this.client?.onBan((_: string, user: string) => {
       callback(user)
     })
-  }
 
-  onTimeout(callback: (user: string) => void) {
-    if (this.client === null) {
-      return
-    }
-
-    this.client.onTimeout((_: string, user: string) => {
+    this.client?.onTimeout((_: string, user: string) => {
       callback(user)
     })
   }
 
   disconnect(): void {
-    if (this.client === null) {
-      return
-    }
-
-    this.client.quit()
-  }
-
-  private createMessageId(twurpleMessageId: string, user: string) {
-    return this.hash.hash(twurpleMessageId + user)
+    this.client?.quit()
   }
 }

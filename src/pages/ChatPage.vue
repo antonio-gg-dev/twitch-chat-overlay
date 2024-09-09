@@ -35,22 +35,18 @@ export default defineComponent({
     if (chat) {
       chat.connect(this.channel)
 
-      chat.onMessage((message) => {
+      chat.addMessage((message) => {
         this.messages.push(message)
 
         this.messages = this.messages.slice(-20)
       })
 
-      chat.onRemoveMessage((messageId) => {
-        this.messages = this.messages.filter((message) => message.id !== messageId)
+      chat.removeMessageById((id) => {
+        this.messages = this.messages.filter((message) => message.id !== id)
       })
 
-      chat.onBan((user) => {
-        this.removeMessagesFrom(user)
-      })
-
-      chat.onTimeout((user) => {
-        this.removeMessagesFrom(user)
+      chat.removeMessageByUser((user) => {
+        this.messages = this.messages.filter((message) => message.user !== user)
       })
     }
 
@@ -86,10 +82,6 @@ export default defineComponent({
       if (this.cleanupIntervalId) {
         clearInterval(this.cleanupIntervalId)
       }
-    },
-
-    removeMessagesFrom(user: string) {
-      this.messages = this.messages.filter((message) => message.user !== user)
     }
   }
 })
