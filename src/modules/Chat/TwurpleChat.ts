@@ -1,9 +1,10 @@
 import type { ChatInterface } from '@/modules/Chat/ChatInterface'
+import type { EmotesParserInterface } from '@/modules/Chat/EmotesParserInterface'
 import type { Message } from '@/modules/Chat/Message'
 import { ChatClient, ChatMessage } from '@twurple/chat'
 
 export class TwurpleChat implements ChatInterface {
-  constructor(private client: ChatClient) {}
+  constructor(private client: ChatClient, private emotesParser: EmotesParserInterface) { }
 
   connect(channel: string): void {
     this.client.connect()
@@ -23,11 +24,14 @@ export class TwurpleChat implements ChatInterface {
         color = data.userInfo.color
       }
 
+      const emoteOcurrences = data.tags.get('emotes') || ''
+      const parsedMessage = this.emotesParser.parseMessageWithEmotes(message, emoteOcurrences)
+
       callback({
         id: data.id,
         user: user,
         color: color,
-        message: message,
+        message: parsedMessage,
         date: data.date
       })
     })

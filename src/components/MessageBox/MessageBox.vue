@@ -7,7 +7,14 @@
     <span class="message-box__test"></span>
 
     <p class="message-box__message">
-      {{ message }}
+      <span v-for="(segment, index) in message" :key="index">
+        <template v-if="segment.type === 'text'">
+          {{ segment.content }}
+        </template>
+        <template v-else-if="segment.type === 'emote'">
+          <img :src="segment.content" class="message-box__message__emote" />
+        </template>
+      </span>
     </p>
   </div>
 </template>
@@ -16,6 +23,7 @@
 import { type CSSProperties, defineComponent, type PropType } from 'vue'
 import { ColorVariants, type ColorVariantsInterface } from '@/modules/Color/ColorVariantsInterface'
 import { UserColor, UserColorService } from '@/modules/Color/UserColorService'
+import { type MessageSegment } from '@/modules/Chat/Message'
 
 export default defineComponent({
   inject: {
@@ -35,7 +43,7 @@ export default defineComponent({
     },
     message: {
       required: true,
-      type: String as PropType<string>
+      type: Array as PropType<MessageSegment[]>
     }
   },
 
@@ -98,6 +106,10 @@ export default defineComponent({
         var(--color-primary-light)
       );
       content: '';
+    }
+
+    &__emote {
+      @apply inline-block h-7 pr-1;
     }
   }
 }
