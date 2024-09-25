@@ -1,6 +1,12 @@
 import type { EmotesParserInterface } from "@/modules/Chat/EmotesParserInterface";
 import type { MessageSegment } from "./Message";
 
+interface Emote {
+    id: string
+    start: number
+    end: number
+}
+
 export const EMOTE_URL_TEMPLATE = 'https://static-cdn.jtvnw.net/emoticons/v2/%id/default/dark/1.0';
 
 export class EmotesParserService implements EmotesParserInterface {
@@ -9,13 +15,12 @@ export class EmotesParserService implements EmotesParserInterface {
             return [{ type: 'text', content: message }];
         }
 
-        interface Emote {
-            id: string
-            start: number
-            end: number
-        }
+        const emotes = this.extractEmotes(emoteOccurrences);
+        const sortedEmotes = this.sortEmotesByPosition(emotes);
+        return this.buildMessageSegments(message, sortedEmotes);
+    }
 
-        const messageSegments: MessageSegment[] = [];
+    private extractEmotes(emoteOccurrences: string): Emote[] {
         const emotes: Emote[] = [];
 
         emoteOccurrences.split('/').forEach((emoteOccurrence) => {
@@ -26,8 +31,15 @@ export class EmotesParserService implements EmotesParserInterface {
             });
         });
 
-        emotes.sort((a, b) => a.start - b.start);
+        return emotes;
+    }
 
+    private sortEmotesByPosition(emotes: Emote[]): Emote[] {
+        return emotes.sort((a, b) => a.start - b.start);
+    }
+
+    private buildMessageSegments(message: string, emotes: Emote[]): MessageSegment[] {
+        const messageSegments: MessageSegment[] = [];
         let lastEnd = 0;
 
         emotes.forEach(emote => {
