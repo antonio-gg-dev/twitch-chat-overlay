@@ -17,7 +17,7 @@ describe('EmotesParserService', () => {
 
         expect(emotesParser.parseMessageWithEmotes(message, emoteOccurrences)).toEqual(expected)
     })
-    it('should parse an emote in the beginning of a message', () => {
+    it('should parse an emote at the beginning of a message', () => {
         const message = 'Kappa hello world'
         const emoteOccurrences = '25:0-4'
         const expected: MessageSegment[] = [
@@ -38,7 +38,7 @@ describe('EmotesParserService', () => {
 
         expect(emotesParser.parseMessageWithEmotes(message, emoteOccurrences)).toEqual(expected)
     })
-    it('should parse an emote in the end of a message', () => {
+    it('should parse an emote at the end of a message', () => {
         const message = 'hello world Kappa'
         const emoteOccurrences = '25:12-16'
         const expected: MessageSegment[] = [
@@ -59,7 +59,7 @@ describe('EmotesParserService', () => {
 
         expect(emotesParser.parseMessageWithEmotes(message, emoteOccurrences)).toEqual(expected)
     })
-    it('should parse two of the same emote', () => {
+    it('should parse a repeated emote', () => {
         const message = 'Kappa hello world Kappa'
         const emoteOccurrences = '25:0-4,18-22'
         const expected: MessageSegment[] = [
@@ -70,7 +70,7 @@ describe('EmotesParserService', () => {
 
         expect(emotesParser.parseMessageWithEmotes(message, emoteOccurrences)).toEqual(expected)
     })
-    it('should parse two different emotes repeated twice', () => {
+    it('should parse two different repeated emotes repeated', () => {
         const message = 'Kappa is funny Kappa but LUL is funnier LUL'
         const emoteOccurrences = '25:0-4,15-19/425618:25-27,40-42'
         const expected: MessageSegment[] = [
@@ -85,7 +85,7 @@ describe('EmotesParserService', () => {
 
         expect(emotesParser.parseMessageWithEmotes(message, emoteOccurrences)).toEqual(expected)
     })
-    it('should parse two of the same emote with a different emote in the middle', () => {
+    it('should parse two occurrences of the same emote with a different emote in the middle', () => {
         const message = 'Kappa hello LUL world Kappa'
         const emoteOccurrences = '25:0-4,22-26/425618:12-14'
         const expected: MessageSegment[] = [
