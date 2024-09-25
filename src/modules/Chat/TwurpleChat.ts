@@ -4,7 +4,10 @@ import type { Message } from '@/modules/Chat/Message'
 import { ChatClient, ChatMessage } from '@twurple/chat'
 
 export class TwurpleChat implements ChatInterface {
-  constructor(private client: ChatClient, private emotesParser: EmotesParserInterface) { }
+  constructor(
+    private client: ChatClient,
+    private emotesParser: EmotesParserInterface
+  ) {}
 
   connect(channel: string): void {
     this.client.connect()

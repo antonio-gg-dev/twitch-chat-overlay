@@ -45,7 +45,13 @@ export const LongMessage: StoryObj<typeof MessageBox> = {
   args: {
     user: 'luz_bot',
     color: '#531ac5',
-    message: [{ type: 'text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum luctus mauris, at venenatis eros aliquam ac. Nam pellentesque luctus erat vel ultrices. Integer blandit, dui vitae convallis ornare, nisi libero euismod odio, sit amet eleifend sapien velit at massa. Donec orci magna, molestie sed elementum vitae, tempus id tellus. Suspendisse finibus malesuada eros nec pretium. Integer malesuada congue feugiat. Vestibulum arcu erat, auctor quis ullamcorper vitae, tempus nec ex. Aliquam auctor faucibus lorem, ultrices suscipit justo finibus eget. Mauris gravida est in nunc sodales lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti.' }]
+    message: [
+      {
+        type: 'text',
+        content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum luctus mauris, at venenatis eros aliquam ac. Nam pellentesque luctus erat vel ultrices. Integer blandit, dui vitae convallis ornare, nisi libero euismod odio, sit amet eleifend sapien velit at massa. Donec orci magna, molestie sed elementum vitae, tempus id tellus. Suspendisse finibus malesuada eros nec pretium. Integer malesuada congue feugiat. Vestibulum arcu erat, auctor quis ullamcorper vitae, tempus nec ex. Aliquam auctor faucibus lorem, ultrices suscipit justo finibus eget. Mauris gravida est in nunc sodales lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti.'
+      }
+    ]
   }
 }
 
@@ -53,7 +59,11 @@ export const Emotes: StoryObj<typeof MessageBox> = {
   args: {
     user: 'dk4n',
     color: '#8efaed',
-    message: [{ type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '25') }, { type: 'text', content: 'Buenos dias ' }, { type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '425618') }]
+    message: [
+      { type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '25') },
+      { type: 'text', content: 'Buenos dias ' },
+      { type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '425618') }
+    ]
   }
 }
 
@@ -61,6 +71,13 @@ export const LongMessageEmotes: StoryObj<typeof MessageBox> = {
   args: {
     user: 'dk4n',
     color: '#8efaed',
-    message: [{ type: 'text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum luctus mauris, at venenatis eros aliquam ac. Nam pellentesque luctus erat vel ultrices. Integer blandit, dui vitae convallis ornare, nisi libero euismod odio, sit amet eleifend sapien velit at massa. Donec orci magna, molestie sed elementum vitae, tempus id tellus. Suspendisse finibus malesuada eros nec pretium. Integer malesuada congue feugiat. Vestibulum arcu erat, auctor quis ullamcorper vitae, tempus nec ex. Aliquam auctor faucibus lorem, ultrices suscipit justo finibus eget. Mauris gravida est in nunc sodales lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti.' }, { type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '25') }]
+    message: [
+      {
+        type: 'text',
+        content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum luctus mauris, at venenatis eros aliquam ac. Nam pellentesque luctus erat vel ultrices. Integer blandit, dui vitae convallis ornare, nisi libero euismod odio, sit amet eleifend sapien velit at massa. Donec orci magna, molestie sed elementum vitae, tempus id tellus. Suspendisse finibus malesuada eros nec pretium. Integer malesuada congue feugiat. Vestibulum arcu erat, auctor quis ullamcorper vitae, tempus nec ex. Aliquam auctor faucibus lorem, ultrices suscipit justo finibus eget. Mauris gravida est in nunc sodales lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti.'
+      },
+      { type: 'emote', content: EMOTE_URL_TEMPLATE.replace('%id', '25') }
+    ]
   }
 }
