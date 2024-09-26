@@ -10,10 +10,11 @@ import { Toast } from '@/modules/Toast/ToastInterface'
 import { NotyfToast } from '@/modules/Toast/NotyfToast'
 import { Notyf } from 'notyf'
 import { ChatClient } from '@twurple/chat'
+import { EmotesParserService } from '@/modules/Chat/EmotesParserService'
 
 export function provide(app: App): void {
   app.provide<ColorVariantsInterface>(ColorVariants, new ColorJsIoColorVariants())
   app.provide<UserColorService>(UserColor, new UserColorService(new Md5Hash()))
-  app.provide<ChatInterface>(Chat, new TwurpleChat(new ChatClient()))
+  app.provide<ChatInterface>(Chat, new TwurpleChat(new ChatClient(), new EmotesParserService()))
   app.provide<ToastInterface>(Toast, new NotyfToast(new Notyf()))
 }
