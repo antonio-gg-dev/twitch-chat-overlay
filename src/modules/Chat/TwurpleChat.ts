@@ -32,7 +32,7 @@ export class TwurpleChat implements ChatInterface {
 
       callback({
         id: data.id,
-        user: user,
+        user: data.userInfo.displayName || user,
         color: color,
         message: parsedMessage,
         date: data.date
